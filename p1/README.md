@@ -4,6 +4,7 @@
 
 Du trenger å ha installert følgende programvare:
 
+- en eller annen terminal-emulator du kan kjøre Bash-kommandoer i (helst WSL for Windows-brukere)
 - [Docker Engine](https://docs.docker.com/get-docker) eller [podman](https://podman.io/docs/installation) eller [Colima](https://github.com/abiosoft/colima/blob/main/docs/INSTALL.md)
 - [kubectl](https://kubernetes.io/docs/tasks/tools)
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start)
