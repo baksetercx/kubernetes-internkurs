@@ -19,5 +19,5 @@ kind delete cluster
 
 ### Windows
 
-Hvis du er på Windows, må du også ha installert WSL2.
-kind har en guide [her](https://kind.sigs.k8s.io/docs/user/using-wsl2).
+Hvis du er på Windows, er det anbefalt å kjøre `kind` i WSL2.
+Det finnes en guide [her](https://kind.sigs.k8s.io/docs/user/using-wsl2).
