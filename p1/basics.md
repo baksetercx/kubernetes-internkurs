@@ -168,31 +168,3 @@ kubectl apply -f deployment.yml
 </details>
 
 Gjerne sjekk loggen for å se om pod'en printer riktig.
-
-## Secrets
-
-### 🔨 Oppgave 3.1
-
-Lag en `Secret` med navn `my-database-secret` i ditt namespace som inneholder verdiene `DATABASE_USERNAME=admin` og `DATABASE_PASSWORD=hemmelig-passord`.
-
-<details>
-  <summary>✨ Se fasit</summary>
-
-```bash
-kubectl -n <ditt navn> create secret generic --from-literal=DATABASE_USERNAME=admin --from-literal=DATABASE_PASSWORD=hemmelig-passord
-```
-
-</details>
-
-### 🔨 Oppgave 3.2
-
-Nå har vi lyst til å bruke `my-database-secret`.
-
-<details>
-  <summary>✨ Se fasit</summary>
-
-```bash
-kubectl -n <ditt navn> create secret generic --from-literal=DATABASE_USERNAME=admin --from-literal=DATABASE_PASSWORD=hemmelig-passord
-```
-
-</details>

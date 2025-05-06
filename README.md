@@ -7,7 +7,7 @@
 - Intro
 - Hva er Kubernetes? (containere, orkestrering, spesifikasjon av ressurser)
 - Grunnlegende: Pods, ReplicaSets og Deployments
-- Konfigurasjon: ConfigMaps, Volumes og Secrets
+- Konfigurasjon: ConfigMaps og Secrets
 - Nettverk: Services og NetworkPolicies
 - Tilgangsstyring: ServiceAccounts, (Cluster)Roles og (Cluster)RoleBindings
 
