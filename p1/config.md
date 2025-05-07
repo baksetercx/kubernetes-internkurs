@@ -4,8 +4,9 @@
 
 ### 🔨 Oppgave 3.1
 
-Lag en `Secret` med navn `my-postgres-secret` i ditt namespacet `postgres` som inneholder verdiene
+Lag en `Secret` med navn `my-postgres-secret` i namespacet `postgres` som inneholder verdiene
 `POSTGRES_USER=postgres` og `POSTGRES_PASSWORD=hemmelig-passord`.
+Hvis namespace `postgres` ikke eksisterer fra før, må du lage det først.
 
 <details>
   <summary>✨ Se fasit</summary>
@@ -55,14 +56,14 @@ spec:
 
 ### 🔨 Oppgave 4.1
 
-Lag en `ConfigMap` med navn `my-app-config` i ditt namespace som inneholder verdiene
+Lag en `ConfigMap` med navn `my-app-config` i namespacet `app` som inneholder verdiene
 `APP_NAME=my-app` og `APP_VERSION=1.0.0`.
 
 <details>
   <summary>✨ Se fasit</summary>
 
 ```bash
-kubectl -n <ditt navn> create configmap my-app-config --from-literal=APP_NAME=my-app --from-literal=APP_VERSION=1.0.0
+kubectl -n app create configmap my-app-config --from-literal=APP_NAME=my-app --from-literal=APP_VERSION=1.0.0
 ```
 
 </details>
@@ -70,9 +71,9 @@ kubectl -n <ditt navn> create configmap my-app-config --from-literal=APP_NAME=my
 ### 🔨 Oppgave 4.2
 
 Nå har vi lyst til å bruke `my-app-config` i en `Deployment`.
-Lag en `Deployment` med navn `my-app-deployment` i ditt namespace som bruker `my-app-config` som en `envFrom`-variabel.
+Lag en `Deployment` med navn `my-app-deployment` i ditt namespacet `app` som bruker `my-app-config` som en `envFrom`-variabel.
 
-Den skal kjøre en `nginx`-container med `image=nginx:latest` og ha 1 replica.
+Den skal kjøre kommandoen `/bin/sh -c 'echo "Running $APP_NAME, version $APP_VERSION"'` i en `nginx`-container med `image=nginx:latest` og ha 1 replica.
 
 <details>
   <summary>✨ Se fasit</summary>
@@ -82,7 +83,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app-deployment
-  namespace: <ditt navn>
+  namespace: app
 spec:
     replicas: 1
     selector:
@@ -96,6 +97,7 @@ spec:
         containers:
             - name: nginx
             image: nginx:latest
+            command: ["sh", "-c", "echo 'Running $APP_NAME, version $APP_VERSION'"]
             envFrom:
                 - configMapRef:
                     name: my-app-config

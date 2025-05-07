@@ -1,15 +1,14 @@
-# kubernetes-workshop
+# kubernetes-internkurs
 
 ## Del 1 - Kubernetes
 
-### Tentativt program
+### Presentasjon
 
-- Intro
-- Hva er Kubernetes? (containere, orkestrering, spesifikasjon av ressurser)
-- Grunnlegende: Pods, ReplicaSets og Deployments
-- Konfigurasjon: ConfigMaps og Secrets
-- Nettverk: Services og NetworkPolicies
-- Tilgangsstyring: ServiceAccounts, (Cluster)Roles og (Cluster)RoleBindings
+[Link til presentasjon.](https://docs.google.com/presentation/d/e/2PACX-1vQIIp820onJchOXSr2ax8ngDo5g8RMpm7JRFIhqaqlwh_Wf4Lis62d3s38VtLNVGaQ5mzQx_N1ibHgR/pub?start=false&loop=false&delayms=3000)
+
+### Oppgaver
+
+Se [her](p1/README.md) for oppgaver tilhørende del 1.
 
 ## Del 2 - Cloud Native
 

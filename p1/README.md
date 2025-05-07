@@ -21,3 +21,10 @@ kind delete cluster
 
 Hvis du er på Windows, er det anbefalt å kjøre `kind` i WSL2.
 Det finnes en guide [her](https://kind.sigs.k8s.io/docs/user/using-wsl2).
+
+## Oppgaver
+
+1. [Grunnlegende](basics.md)
+2. [Konfigurasjon](config.md)
+3. [Nettverk](networking.md)
+4. [Rollestyring](rbac.md)
