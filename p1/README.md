@@ -28,3 +28,13 @@ Det finnes en guide [her](https://kind.sigs.k8s.io/docs/user/using-wsl2).
 2. [Konfigurasjon](config.md)
 3. [Nettverk](networking.md)
 4. [Rollestyring](rbac.md)
+
+## Nyttig informasjon
+
+- [Kubernetes sin offisielle dokumentasjon](https://kubernetes.io/docs/home)
+- `kubectl explain`: Forklarer hva en ressurs er og hvilke felt den har. Eksempel:
+  ```bash
+  kubectl explain pod
+  kubectl explain pod.spec
+  kubectl explain pod.spec.containers
+  ```
