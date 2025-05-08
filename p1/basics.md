@@ -71,7 +71,7 @@ Skriv en `kubectl`-kommando for å lage denne deployment'en.
   <summary>✨ Se fasit</summary>
 
 ```bash
-kubectl -n app create deployment my-deployment --image=nginx --replicas=1 -- /bin/sh -c 'while true; do echo hello; sleep 10;done'
+kubectl -n app create deployment my-deployment --image=nginx --replicas=1 -- /bin/sh -c 'while true; do echo "Hello, $MY_NAME"; sleep 10; done'
 ```
 
 </details>
@@ -166,7 +166,8 @@ spec:
         - -c
         - while true; do echo "Hello, $MY_NAME!"; sleep 10; done
         env:
-          MY_NAME: andreas
+          - name: MY_NAME
+            value: andreas
         image: nginx
         name: nginx
 ```
@@ -175,13 +176,13 @@ spec:
 
 #### c) Bruk `kubectl` for å pushe endringen i konfiruasjonsfilen `deployment.yml` til Kubernetes.
 
-💡 _HINT:_ Bruk `kubectl apply`.
+💡 _HINT:_ Bruk `kubectl replace`.
 
 <details>
   <summary>✨ Se fasit</summary>
 
 ```bash
-kubectl apply -f deployment.yml
+kubectl replace -f deployment.yml
 ```
 
 </details>

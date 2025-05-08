@@ -73,7 +73,7 @@ kubectl -n app create configmap my-app-config --from-literal=APP_NAME=my-app --f
 Nå har vi lyst til å bruke `my-app-config` i en `Deployment`.
 Lag en `Deployment` med navn `my-app-deployment` i ditt namespacet `app` som bruker `my-app-config` som en `envFrom`-variabel.
 
-Den skal kjøre kommandoen `/bin/sh -c 'echo "Running $APP_NAME, version $APP_VERSION"'` i en `nginx`-container med `image=nginx:latest` og ha 1 replica.
+Den skal kjøre kommandoen `/bin/sh -c 'echo "Running $APP_NAME, version $APP_VERSION"' && sleep 3600'` i en `nginx`-container med `image=nginx:latest` og ha 1 replica.
 
 <details>
   <summary>✨ Se fasit</summary>
@@ -85,20 +85,25 @@ metadata:
   name: my-app-deployment
   namespace: app
 spec:
-    replicas: 1
-    selector:
-        matchLabels:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app-deployment
+  template:
+    metadata:
+      labels:
         app: my-app-deployment
-    template:
-        metadata:
-        labels:
-            app: my-app-deployment
-        spec:
-        containers:
-            - name: nginx
-            image: nginx:latest
-            command: ["sh", "-c", "echo 'Running $APP_NAME, version $APP_VERSION'"]
-            envFrom:
-                - configMapRef:
-                    name: my-app-config
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          command:
+            [
+              '/bin/sh',
+              '-c',
+              'echo "Running $APP_NAME, version $APP_VERSION" && sleep 3600',
+            ]
+          envFrom:
+            - configMapRef:
+                name: my-app-config
 ```
