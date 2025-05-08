@@ -13,10 +13,15 @@ Skriv en `kubectl`-kommando for å lage både pod'en og servicen.
 
 💡 _HINT:_ Bruk `kubectl expose`-kommandoen.
 
+<details>
+  <summary>✨ Se fasit</summary>
+
 ```bash
 kubectl -n app run my-pod --image=nginx --port=80
 kubectl -n app expose pod my-pod --port=80 --target-port=80 --name=my-service --type=NodePort
 ```
+
+</details>
 
 ### 🔨 Oppgave 5.2
 
@@ -29,6 +34,9 @@ Du skal kunne bruke netttleseren din til å nå `my-service` via `http://<node-i
 
 💡 _HINT:_ Bruk `kubectl get nodes -o wide` for å finne IP-adressen til nodene i clusteret.
 
+<details>
+  <summary>✨ Se fasit</summary>
+
 ```bash
 # Hent IP-adressen til noden i clusteret
 kubectl get nodes -o wide
@@ -36,10 +44,11 @@ kubectl get nodes -o wide
 kubectl -n app get service my-service
 # Kombiner IP-adressen og porten
 
-
 # Fancy one-liner
 echo "$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type == "InternalIP")].address}'):$(kubectl get svc -n app my-service -o jsonpath='{.spec.ports[0].nodePort}')"
 ```
+
+</details>
 
 ## NetworkPolicies
 
@@ -52,6 +61,9 @@ Den skal matche på en label som treffer `my-pod`; dersom du lagde `my-pod` med 
 Hvis ikke, kan du lage den på nytt elle redigere med `kubectl edit` eller `kubectl label`.
 
 💡 _HINT:_ Bruk `kubectl apply`-kommandoen med en yaml-fil.
+
+<details>
+  <summary>✨ Se fasit</summary>
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -67,5 +79,7 @@ spec:
     - Ingress
   ingress: []
 ```
+
+</details>
 
 Hvis alt er riktig, burde du ikke lenger kunne nå `my-pod`, pga. networkpolicy.
