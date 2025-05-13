@@ -4,7 +4,7 @@
 
 ### Presentasjon
 
-[Link til presentasjon.](https://docs.google.com/presentation/d/e/2PACX-1vQIIp820onJchOXSr2ax8ngDo5g8RMpm7JRFIhqaqlwh_Wf4Lis62d3s38VtLNVGaQ5mzQx_N1ibHgR/pub?start=false&loop=false&delayms=3000)
+[Link til presentasjon](p1/slides.pdf).
 
 ### Oppgaver
 
@@ -12,10 +12,10 @@ Se [her](p1/README.md) for oppgaver tilhørende del 1.
 
 ## Del 2 - Cloud Native
 
-### Tentativt program
+### Presentasjon
 
-- Hvor Kubernetes virkelig skinner - Cloud Native
-- Helm for deployment
-- CRDs og Operators
-- Helm for Operators (Traefik)
-- Lage Ingress med Traefik
+[Link til presentasjon](p2/slides.pdf).
+
+### Oppgaver
+
+Se [her](p2/README.md) for oppgaver tilhørende del 2.
