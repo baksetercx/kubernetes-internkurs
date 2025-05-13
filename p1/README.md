@@ -9,7 +9,7 @@ Du trenger å ha installert følgende programvare:
 - [kubectl](https://kubernetes.io/docs/tasks/tools)
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start)
 
-Hvis du klarer å kjøre disse kommandene i terminalen din, er alt klart:
+Hvis du klarer å kjøre disse kommandoene i terminalen din, er alt klart:
 
 ```bash
 kind create cluster
