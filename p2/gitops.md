@@ -50,7 +50,7 @@ Gå til [localhost:8080](http://localhost:8080) i nettleseren din og logg inn me
 
 Nå kan vi endelig lage en Argo CD-applikasjon!
 
-Lag en Argo CD-applikasjon som peker til `my-chart`-chartet vårt i Git-repoet vårt (kubernetes-internkurs) i mappen `p2/my-chart`.
+Lag en Argo CD-applikasjon som peker til `my-chart`-chartet vårt i Git-repoet vårt (kubernetes-internkurs) i mappen `p2/charts/my-chart`.
 Du skal lage applikasjonen i `argocd`-namespace og bruke `my-namespace` som destinasjons-namespace.
 
 **IKKE LAG DEN I GUI! Lag en YAML-spec.**
@@ -61,6 +61,7 @@ Du skal lage applikasjonen i `argocd`-namespace og bruke `my-namespace` som dest
   <summary>✨ Se fasit</summary>
 
 ```yaml
+# my-chart.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -71,27 +72,90 @@ spec:
   source:
     repoURL: https://github.com/baksetercx/kubernetes-internkurs
     targetRevision: HEAD
-    path: p2/my-chart
+    path: p2/charts/my-chart
   destination:
     server: https://kubernetes.default.svc
     namespace: my-namespace
 ```
 
+```bash
+# Lag applikasjonen
+kubectl apply -f my-chart.yaml
+```
+
 </details>
+
+Når du er ferdig kan du gå inn i Argo CD-grensesnittet og se trykke på **Sync**.
 
 ### 🔨 Oppgave 3.4
 
 Vi kan også peke direkte på et Helm-chart når vi lager en Argo CD-applikasjon, istedet for å peke på en Git-repo med YAML-filer.
-Lag en Argo CD-applikasjon som installer Helm-chartet til Grafana i `grafana`-namespace.
+Lag enda en Argo CD-applikasjon som installer Helm-chartet til Grafana i `grafana`-namespace.
 
 Du skal lage applikasjonen i `argocd`-namespace og bruke `grafana` som destinasjons-namespace.
 
 **IKKE LAG DEN I GUI! Lag en YAML-spec.**
 
-💡 _HINT:_ Les dokumentasjonen til Argo CD for å finne ut hvordan du lager en applikasjon som bruker Helm direkte: https://argo-cd.readthedocs.io/en/stable/user-guide/helm
+💡 _HINT 1:_ Les dokumentasjonen til Argo CD for å finne ut hvordan du lager en applikasjon som bruker Helm direkte: https://argo-cd.readthedocs.io/en/stable/user-guide/helm
+
+💡 _HINT 2:_ Du kan bruke `targetRevision: '*'` for å bruke den nyeste versjonen av chartet.
 
 <details>
   <summary>✨ Se fasit</summary>
+
+```yaml
+# grafana.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    chart: grafana
+    targetRevision: '*'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: grafana
+```
+
+```bash
+kubectl apply -f grafana.yaml
+```
+
+</details>
+
+### 🔨 Oppgave 3.5
+
+Nå vil vi at Argo CD applikasjonene våre skal synces automatisk.
+
+Skru på automatisk sync og self-healing ved å endre spec'en til `my-chart`- og `grafana`-applikasjonen.
+
+💡 _HINT:_ Les dokumentasjonen til Argo CD for å finne ut hvordan du aktiverer automatisk sync og self-healing: https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync
+
+<details>
+  <summary>✨ Se fasit</summary>
+
+```yaml
+# my-chart.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-chart
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/baksetercx/kubernetes-internkurs
+    targetRevision: HEAD
+    path: p2/charts/my-chart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-namespace
+# grafana.yaml
+```
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -103,9 +167,19 @@ spec:
   project: default
   source:
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: HEAD
     chart: grafana
+    targetRevision: '*'
   destination:
     server: https://kubernetes.default.svc
     namespace: grafana
+  syncPolicy:
+    automated:
+      selfHeal: true
 ```
+
+```bash
+kubectl apply -f my-chart.yaml
+kubectl apply -f grafana.yaml
+```
+
+</details>

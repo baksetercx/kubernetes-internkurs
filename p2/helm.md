@@ -28,15 +28,16 @@ Vi ønsker også at Helm skal lage namespace hvis det ikke allerede eksisterer.
   <summary>✨ Se fasit</summary>
 
 ```bash
-helm -n my-namespace install my-release . --create-namespace
+# vi antar mappen du er i inneholder mappen `my-chart`
+helm -n my-namespace install my-release my-chart --create-namespace
 ```
 
 </details>
 
-Du kan nå se historiikken til Helm-releasen ved å kjøre:
+Se om Helm har installert chartet vårt ved å liste opp alle releases i `my-namespace`:
 
 ```bash
-helm -n my-namespace history my-release
+helm -n my-namespace list
 ```
 
 Dersom alt gikk bra, burde du ha laget noen ressurser i `my-namespace`:
@@ -69,6 +70,7 @@ helm -n my-namespace upgrade my-release .
 
 Vi har lyst til å bruke Helm til å installere en **cluster addon**.
 Installer Grafana ved å bruke Helm.
+Det skal innstalleres i namespacet `grafana`. Opprett det hvis det ikke finnes fra før.
 
 Du finner Helm-chartet til Grafana på [Grafana Helm Chart](https://artifacthub.io/packages/helm/grafana/grafana).
 
